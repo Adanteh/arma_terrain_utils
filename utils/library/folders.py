@@ -2,9 +2,9 @@ from pathlib import Path
 from typing import List, Generator, Tuple
 from collections import defaultdict, OrderedDict
 
-from . import print
-from .lib import ModelEntry
-from .get_category import clean_name, get_category_custom
+from utils import print
+from utils.tb import ModelEntry
+from utils.library.get_category import clean_name, get_category_custom
 
 BLACKLIST = [
     "air",
@@ -38,6 +38,7 @@ class keydefaultdict(defaultdict):
             ret = self[key] = self.default_factory(key)
             return ret
 
+
 class folderWalk:
     def __init__(self, target: Path, blacklist: List[str] = None, root: Path = None):
         """
@@ -58,7 +59,7 @@ class folderWalk:
         """Walks the folders below start path, checking for p3d"""
 
         if not self.root.exists():
-            print(f"<error>The given workdrive path {self.root} does not exist (Use --help param for usage)</error>")
+            print(f"<error>The given womodel_path--help param for usage)</error>")
             return
 
         if not self.target.exists():
@@ -97,7 +98,7 @@ class folderWalk:
 
         # Skip any folder starting with underscore
         if list(filter(lambda x: x.startswith("_"), parents)):
-            print(f"<grey>found underscore in {parents}</grey>")
+            # print(f"<grey>found underscore in {parents}</grey>")
             return False
 
         return True

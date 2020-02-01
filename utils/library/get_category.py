@@ -1,4 +1,5 @@
 from typing import List
+from pathlib import Path
 from collections import namedtuple
 
 
@@ -7,7 +8,7 @@ def clean_name(name: str) -> str:
 
     # Apex prefix instead of _exp suffix
     for prefix, suffix in (("apex", "_exp"), ("malden", "_argo"), ("decals", "_decals"), ("enoch", "_enoch")):
-        if name.find(suffix):
+        if name.find(suffix) != -1:
             name = name.replace(suffix, "")
             if name.startswith("a3"):
                 name = name.replace("a3", prefix)
@@ -31,7 +32,7 @@ def clean_name(name: str) -> str:
         name = name.replace(cleanup, "")
 
     # Group up all CUP misc items
-    if name.find("ca_misc"):
+    if name.find("ca_misc") != -1:
         name = "ca_misc"
 
     name = name.replace("cup_terrains_cup_terrains", "cup")
@@ -45,7 +46,7 @@ def clean_name(name: str) -> str:
         name = name.replace("_e2", "")
         name = name.replace("ca_", "summer_")
 
-    if name.find("buildings2") or name.find("_cti"):
+    if name.find("buildings2") != -1 or name.find("_cti") != -1:
         nametemp = name.split("_")[:3]
         name = "_".join(nametemp)
 
@@ -56,13 +57,13 @@ def clean_name(name: str) -> str:
     return name
 
 
-def get_category_custom(relative_path: str) -> namedtuple:
+def get_category_custom(relative_path: Path) -> namedtuple:
     """Returns named category, to autogroup objects and assign colors when creating a new library"""
 
-    relative_path = relative_path.lower()
+    model_path = str(relative_path).lower()
 
     def func(path):
-        return path.find(relative_path) >= 0
+        return path.find(model_path) >= 0
 
     def is_category(types: List[str]):
         return bool(filter(func, types))

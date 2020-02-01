@@ -1,7 +1,9 @@
 from csv import QUOTE_NONE, QUOTE_NONNUMERIC  # noqa: F401
 from pathlib import Path
 from dataclasses import dataclass
+from typing import List
 
+import xmltodict
 import pandas as pd
 from pandas import DataFrame
 
@@ -27,6 +29,20 @@ class TbRow:
     end: str = ";"
 
 
+@dataclass
+class ModelEntry:
+    name: str
+    relative_path: str
+    fill: int
+    outline: int
+    landslope: str = False
+    bounding: List[str] = None
+
+    @classmethod
+    def from_library(cls, values: dict):
+        return cls(values["Name"], values["File"], values["Fill"], values["Outline"], values["Placement"])
+
+
 def load_tb(path: Path) -> DataFrame:
     """Makes pandas DataFrame out of Terrain builder format"""
     names = NAMES
@@ -44,3 +60,47 @@ def write_tb(path: Path, df: DataFrame):
     # Require quotes around model. In theory quoting=QUOTE_NONNUMERIC should work, but its broken for formatted floats
     df.update(df[["model"]].applymap('"{}"'.format))
     df.to_csv(path, header=False, index=False, sep=";", quoting=QUOTE_NONE, float_format=float_format)
+
+
+class TbLibrary(object):
+    def __init__(self, library, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        entries = self.__fix(library)
+        self.entries: List[ModelEntry] = [ModelEntry(entry) for entry in entries]
+        self.name = library["Library"]["@name"]
+
+    @classmethod
+    def from_file(cls, path: Path) -> "TbLibrary":
+        """Creates a library from a file directly"""
+        if not path.exists():
+            raise FileNotFoundError
+
+        with path.open(mode="r") as fp:
+            library = xmltodict.parse(fp.read())
+        return cls(library)
+
+    def __fix(self, library) -> List[dict]:
+        """Fixes usual discrepancies between different template files"""
+        try:
+            entries = library["Library"]["Template"]
+            entries[0]["Name"]
+        except (NameError, KeyError):
+            try:
+                entries = [library["Library"]["Template"]]
+            except KeyError:
+                entries = []
+        return entries
+
+    def __len__(self):
+        return len(self.entries)
+
+    def __str__(self):
+        return self.name
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        for i in self.entries:
+            yield i

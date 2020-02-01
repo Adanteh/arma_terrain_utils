@@ -5,21 +5,35 @@ py -m utils.library.generate "P:\a3" "P:\\ca" "P:\\CUP\\Terrains" "P:\\ibr" "P:\
 py -m utils.library.generate "Q:\\dz" --workdrive "Q:\"
 """
 
-import argparse
+import sys
 from typing import Dict, List
 from datetime import datetime
 from collections import defaultdict
 from pathlib import Path
 
-from gooey import Gooey
 import xmltodict
+from gooey import Gooey, GooeyParser
 
-from . import print
-from .lib import ModelEntry
-from .folders import folderWalk 
+FOLDER = Path(__file__).parents[2]
+if str(FOLDER) not in sys.path:
+    sys.path.insert(0, str(FOLDER))
+
+from utils import print  # noqa: E402
+from utils.tb import ModelEntry  # noqa: E402
+from utils.library.folders import folderWalk, BLACKLIST  # noqa: E402
 
 
 class folderToLibrary:
+    """
+        Processes libraries. Call order is:
+            `walk_folder`
+            `folderWalk.walk_folders`
+            `create_libraries`
+            `create_category_library`
+            `set_template_data`
+
+    """
+
     tml_file: dict
     tml_entry: dict
 
@@ -28,7 +42,10 @@ class folderToLibrary:
         self.load_template_library()
         self.template_all = defaultdict(lambda: 0)
         self.categories = defaultdict(list)
-        self.duplicates = 0
+        self.duplicates = []
+
+        self.output = Path.cwd() / "Library"
+        self.output.mkdir(mode=0o775, parents=True, exist_ok=True)
 
         self.walk_folder()
         self.create_libraries(self.categories)
@@ -44,7 +61,7 @@ class folderToLibrary:
     def walk_folder(self):
         walk = folderWalk(self.args.path, self.args.blacklist, root=self.args.root)
         for category, entry in walk.walk_folders():
-            self.categories[category] += entry
+            self.categories[category].append(entry)
 
     def create_libraries(self, categories: Dict[str, List[ModelEntry]]):
         """Creates the library files for each category"""
@@ -52,9 +69,9 @@ class folderToLibrary:
         for category, entries in self.categories.items():
             print(f"<g>Creating new library {category}")
 
-            path = Path.cwd() / "Library" / f"{category}.tml"
+            output = self.output / f"{category}.tml"
             parsed = self.create_category_library(category, entries)
-            with path.open(mode="w") as fp:
+            with output.open(mode="w") as fp:
                 fp.write(xmltodict.unparse(parsed, pretty=True))
 
     def create_category_library(self, category: str, entries: List[ModelEntry]) -> dict:
@@ -73,67 +90,111 @@ class folderToLibrary:
     def set_template_data(self, entry: ModelEntry) -> dict:
         """Sets the data to a template entry in the dictionary"""
 
-        entry = self.tml_entry.copy()
+        tml_base = self.tml_entry.copy()
         uniquename = self.handle_uniqueness(entry.name)
 
-        entry["Name"] = uniquename
-        entry["File"] = entry.relative_path
-        entry["Fill"] = entry.fill
-        entry["Outline"] = entry.outline
-        return entry
+        tml_base["Name"] = uniquename
+        tml_base["File"] = entry.relative_path
+        tml_base["Fill"] = entry.fill
+        tml_base["Outline"] = entry.outline
+        return tml_base
 
     def handle_uniqueness(self, name: str) -> str:
         """Prevents duplicate templates appearing"""
 
-        if self.template_all[name.lower()] == 1:
-            self.duplicates += 1
+        if self.template_all[name.lower()]:
 
             nametemp = name.lower()
             index = 1
-            while self.template_all[nametemp] == 1:
+            while self.template_all[nametemp]:
                 nametemp = f"{name.lower()}_{index}"
                 index += 1
             name = nametemp
+            self.duplicates.append(nametemp)
+
         self.template_all[name.lower()] = 1
         return name
 
     def final(self):
         """Checks if there was any weird behavior in the script"""
-        if self.duplicates > 0:
-            print(f"<error>Found {self.duplicates} duplicate model names, they are autorenamed</error>")
-            print(
-                "<error>This can cause model switching due to the nature of TB and some object placement mods (xcam, e2tb)</error>"
-            )
-            print(
-                "<error>Use the objectPlacement mods including these new generated templates or dealwithit.jpg</error>"
-            )
+        if self.duplicates:
+            self._write_duplicates()
 
         print(f"<e>Completed the script with {len(self.template_all)} models processed</e>")
 
-@Gooey
-def cli():
-    parser = argparse.ArgumentParser(description="TML Generation Script")
-    parser.add_argument("path", help="Path to walk through")
-    parser.add_argument(
-        "--root", help="Workdrive path\n(This should be a parent of the base path!)", required=False, default="P:\\"
-    )
-    parser.add_argument(
-        "--blacklist",
-        help="Ignore folder names containing entries in this list\n"
-        "This list is pretty decent by default, only for pro users",
-        nargs="+",
-        required=False,
-    )
+    def _write_duplicates(self):
+        print(f"<error>Found {len(self.duplicates)} duplicate model names, they are autorenamed</error>")
+        print(
+            "This can cause model switching due to the nature of TB and some object placement mods (xcam, e2tb)"
+        )
 
-    args = parser.parse_args()
-    return args
+        output: Path = self.output / "# duplicates.txt"
+        
+        print(f"<error>Wrote duplicate names to {output}")
+
+        with output.open(mode="w") as fp:
+            for dup in self.duplicates:
+                fp.write(dup + "\n")
 
 
-if __name__ == "__main__":
-    args = cli()
+def main(args):
     try:
         splitter = folderToLibrary(args)
     except KeyboardInterrupt:
-        print("<error>The process was interrupted by the keyboard</error>")
+        print("The process was interrupted by the keyboard</error>")
 
     splitter.final()
+
+
+class Generate:
+    DESCRIPTION = "Generates Terrain Builder template files from walking through folders"
+    NAME = "generate"
+
+    @classmethod
+    def parser(cls, parent=None):
+        if parent is None:
+            parser = GooeyParser(description=cls.DESCRIPTION)
+        else:
+            parser = parent.add_parser(cls.NAME, help=cls.DESCRIPTION)
+
+        parser.add_argument("--path", help="Path to walk through", widget="DirChooser", default="P:\\a3", type=Path)
+        parser.add_argument(
+            "--root",
+            help="Workdrive path\n(This should be a parent of the base path!)",
+            required=False,
+            default="P:\\",
+            widget="DirChooser",
+            type=Path,
+        )
+        parser.add_argument(
+            "--blacklist",
+            help="Ignore folder names containing entries in this list\n"
+            "This list is pretty decent by default, only for pro users",
+            nargs="+",
+            default=BLACKLIST,
+            required=False,
+        )
+        parser.add_argument(
+            "-o", "--output",
+            help="Where to create the library",
+            default=str(Path.cwd() / "Library"),
+            type=Path,
+            widget="DirChooser"
+        )
+
+        return parser
+
+    @classmethod
+    def run(cls, args):
+        if not hasattr(args, "command") or args.command == cls.NAME:
+            main(args)
+
+
+@Gooey
+def cli():
+    parser = Generate.parser()
+    Generate.run(parser.parse_args())
+
+
+if __name__ == "__main__":
+    cli()

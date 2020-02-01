@@ -23,6 +23,7 @@ def slopelandcontact(path: Path) -> bool:
         return True
     return False
 
+
 def boundingbox(path: Path) -> bool:
     """
         Checks if given p3d has slopeLandContact property, objects with this property should never

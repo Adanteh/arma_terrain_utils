@@ -1,19 +1,25 @@
-import argparse
-import xmltodict
-from typing import List
 from pathlib import Path
 
-from .lib import TbLibrary, ModelEntry
-from ..tb import TbRow
-
-
-def cli():
-    parser = argparse.ArgumentParser(description="TML Generation Script")
-    parser.add_argument("library", help="Path to walk through")
-    return parser.parse_args()
+from utils.tb import TbLibrary, ModelEntry, TbRow
 
 
 class CreateObjects:
+    DESCRIPTION = "Creates an object for every single entry in library files"
+    NAME = "create"
+
+    @classmethod
+    def parser(cls, parent=None):
+        _parser = parent.add_parser(cls.NAME, help=cls.DESCRIPTION)
+        _parser.add_argument("library", help="Path to walk through", widget="DirChooser")
+
+    @classmethod
+    def run(cls, args):
+        if args.command != cls.NAME:
+            return
+            
+        obj = cls(args)
+        obj.main(args)
+
     def __init__(self, args):
         self.x = 0
         self.y = 0
@@ -33,6 +39,5 @@ class CreateObjects:
 
 
 if __name__ == "__main__":
-    args = cli()
-    obj = CreateObjects(args)
-    obj.main(args)
+    args = CreateObjects.parser()
+    CreateObjects.run(args)
