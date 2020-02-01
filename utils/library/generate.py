@@ -44,7 +44,7 @@ class folderToLibrary:
         self.categories = defaultdict(list)
         self.duplicates = []
 
-        self.output = Path.cwd() / "Library"
+        self.output = args.output
         self.output.mkdir(mode=0o775, parents=True, exist_ok=True)
 
         self.walk_folder()
