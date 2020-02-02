@@ -9,7 +9,7 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "args": ["--ignore-gooey"],
+            "args": ["--ignore-gooey", "B:\\Projects\\arma_terrain_utils\\Library"],
             "console": "integratedTerminal"
         }
     ]

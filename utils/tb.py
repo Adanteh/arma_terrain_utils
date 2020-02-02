@@ -1,12 +1,13 @@
 from csv import QUOTE_NONE, QUOTE_NONNUMERIC  # noqa: F401
 from pathlib import Path
-from dataclasses import dataclass
+from dataclasses import dataclass, astuple
 from typing import List
 
 import xmltodict
 import pandas as pd
 from pandas import DataFrame
 
+from utils.misc import dict_keys_lower
 
 NAMES = ("model", "x", "y", "dir", "pitch", "bank", "scale", "z", "end")
 
@@ -28,19 +29,35 @@ class TbRow:
     z: float = 0.0
     end: str = ";"
 
+    def as_line(self):
+        """Properly formatted line for a TB file"""
+        values = list(self)
+        values[0] = f'"{values[0]}"'  # Quotes around the model
+        return ";".join((str(f) for f in values)) + self.end
+
+    def __iter__(self):
+        return iter(astuple(self)[:-1])
+
 
 @dataclass
 class ModelEntry:
     name: str
-    relative_path: str
+    file: str
     fill: int
     outline: int
     landslope: str = False
     bounding: List[str] = None
 
     @classmethod
-    def from_library(cls, values: dict):
-        return cls(values["Name"], values["File"], values["Fill"], values["Outline"], values["Placement"])
+    def from_library(cls, values: dict) -> "ModelEntry":
+        values = dict_keys_lower(values)
+        return cls(
+            values["name"],
+            values["file"],
+            int(values["fill"]),
+            int(values["outline"]),
+            values["placement"] == "slopelandcontact",
+        )
 
 
 def load_tb(path: Path) -> DataFrame:
@@ -67,7 +84,7 @@ class TbLibrary(object):
         super().__init__(*args, **kwargs)
 
         entries = self.__fix(library)
-        self.entries: List[ModelEntry] = [ModelEntry(entry) for entry in entries]
+        self.entries: List[ModelEntry] = [ModelEntry.from_library(entry) for entry in entries]
         self.name = library["Library"]["@name"]
 
     @classmethod
@@ -99,8 +116,6 @@ class TbLibrary(object):
         return self.name
 
     def __iter__(self):
-        return self
-
-    def __next__(self):
         for i in self.entries:
             yield i
+
