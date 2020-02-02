@@ -63,10 +63,10 @@ def get_category_custom(relative_path: Path) -> namedtuple:
     model_path = str(relative_path).lower()
 
     def func(path):
-        return path.find(model_path) >= 0
+        return model_path.find(path) >= 0
 
     def is_category(types: List[str]):
-        return bool(filter(func, types))
+        return bool(list(filter(func, types)))
 
     Category = namedtuple("Category", ["category", "fill", "outline"])
     if is_category(["tree", "treeparts"]):

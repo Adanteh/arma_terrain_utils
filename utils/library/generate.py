@@ -94,7 +94,7 @@ class folderToLibrary:
         uniquename = self.handle_uniqueness(entry.name)
 
         tml_base["Name"] = uniquename
-        tml_base["File"] = entry.relative_path
+        tml_base["File"] = entry.file
         tml_base["Fill"] = entry.fill
         tml_base["Outline"] = entry.outline
         return tml_base
