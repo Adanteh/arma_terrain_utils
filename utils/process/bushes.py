@@ -46,6 +46,10 @@ def handle_file(file: Path):
                     new_fp.write(bush)
 
 
+def main(args):
+    pass
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("source", help="The TB file you want to compare distances to", nargs=1)

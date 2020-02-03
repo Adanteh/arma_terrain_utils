@@ -118,4 +118,3 @@ class TbLibrary(object):
     def __iter__(self):
         for i in self.entries:
             yield i
-

@@ -72,6 +72,6 @@ def cli():
     parser = CreateObjects.parser()
     CreateObjects.run(parser.parse_args())
 
-
 if __name__ == "__main__":
+    print(sys.argv)
     cli()

@@ -10,7 +10,6 @@ from utils.library.generate import Generate  # noqa: E402
 from utils.library.create_objects import CreateObjects  # noqa: E402
 
 
-
 @Gooey(optional_cols=2, program_name="Arma terrain utilities", advanced=True)
 def cli():
     parser = GooeyParser(description="Arma terrain utils")
@@ -18,15 +17,9 @@ def cli():
 
     Generate.parser(subs)
     CreateObjects.parser(subs)
-
     args = parser.parse_args()
-
     Generate.run(args)
     CreateObjects.run(args)
-
-
-# def generate(parent=None):
-
 
 
 if __name__ == "__main__":
