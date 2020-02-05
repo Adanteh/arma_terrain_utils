@@ -8,8 +8,8 @@ if str(FOLDER) not in sys.path:
     sys.path.insert(0, str(FOLDER))
 
 
-from utils.library.generate import Generate  # noqa: E402
-from utils.library.create_objects import CreateObjects  # noqa: E402
+from utils.process.library.generate import Generate  # noqa: E402
+from utils.process.library.create_objects import CreateObjects  # noqa: E402
 from utils.process.tml_filter import TmlFilter  # noqa: E402
 
 

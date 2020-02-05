@@ -7,7 +7,8 @@ FOLDER = Path(__file__).parents[2]
 if str(FOLDER) not in sys.path:
     sys.path.insert(0, str(FOLDER))
 
-from utils.tb import TbLibrary, ModelEntry, TbRow  # noqa: E402
+from utils.tb import TbRow  # noqa: E402
+from utils.library import TbLibrary, ModelEntry  # noqa: E402
 
 
 class CreateObjects:

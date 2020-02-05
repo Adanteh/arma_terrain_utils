@@ -3,8 +3,8 @@ from typing import List, Generator, Tuple
 from collections import defaultdict, OrderedDict
 
 from utils import print
-from utils.tb import ModelEntry
-from utils.library.get_category import clean_name, get_category_custom
+from utils.library import ModelEntry
+from utils.process.library.categorize import clean_name, get_category_custom
 
 BLACKLIST = [
     "air",

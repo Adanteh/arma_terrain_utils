@@ -19,8 +19,8 @@ if str(FOLDER) not in sys.path:
     sys.path.insert(0, str(FOLDER))
 
 from utils import print  # noqa: E402
-from utils.tb import ModelEntry  # noqa: E402
-from utils.library.folders import folderWalk, BLACKLIST  # noqa: E402
+from utils.library import ModelEntry  # noqa: E402
+from utils.process.library.folders import folderWalk, BLACKLIST  # noqa: E402
 
 
 class folderToLibrary:
@@ -153,7 +153,7 @@ class Generate:
         if parent is None:
             parser = GooeyParser(description=cls.DESCRIPTION)
         else:
-            parser = parent.add_parser(cls.NAME, help=cls.DESCRIPTION, metavar="1", description="Booga")
+            parser = parent.add_parser(cls.NAME, help=cls.DESCRIPTION)
 
         parser.add_argument("--path", help="Path to walk through", widget="DirChooser", default="P:/a3", type=Path)
         parser.add_argument(
