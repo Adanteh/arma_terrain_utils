@@ -59,11 +59,11 @@ class folderWalk:
         """Walks the folders below start path, checking for p3d"""
 
         if not self.root.exists():
-            print(f"<error>The given womodel_path--help param for usage)</error>")
+            print(f"<error>The given root '{self.root}' doesn't exist</error>")
             return
 
         if not self.target.exists():
-            print(f"<error>The given base path {self.target} does not exist (Workdrive not mounted?)</error>")
+            print(f"<error>The given base path {self.target} does not exist</error>")
             return
 
         print(f"<g>Starting p3d search within path {self.target}</g>")

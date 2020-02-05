@@ -4,7 +4,6 @@
 
 """
 
-import argparse
 import sys
 from pathlib import Path
 from typing import Tuple
@@ -25,7 +24,9 @@ FOLDER = Path(__file__).parent
 
 class NearbyFiltering:
     RADIUS = 4
-    DESCRIPTION = "Allows you to automatically delete objects in a file, when they are closer than X distance to another file"
+    DESCRIPTION = (
+        "Allows you to automatically delete objects in a file, when they are closer than X distance to another file"
+    )
 
     def __init__(self, radius: float, source: DataFrame, target: DataFrame):
         self.r = radius
@@ -55,7 +56,6 @@ class NearbyFiltering:
         nearby = self.tree.query_ball_point(point, radius)
         return nearby
 
-
     @classmethod
     def parser(cls):
         parser = GooeyParser(description=cls.DESCRIPTION)
@@ -78,11 +78,11 @@ class NearbyFiltering:
         write_tb(outpath, out)
 
 
-@Gooey
-def cli():
-    parser = NearbyFiltering.parser()
-    NearbyFiltering.run(parser.parse_args())
-
-
 if __name__ == "__main__":
+
+    @Gooey
+    def cli():
+        parser = NearbyFiltering.parser()
+        NearbyFiltering.run(parser.parse_args())
+
     cli()

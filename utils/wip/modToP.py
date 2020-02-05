@@ -19,17 +19,28 @@ import subprocess
 import glob
 import argparse
 
-from ObjectPlacement.pyarma.common.colorsLog import print_error, print_green, print_magenta, print_blue, print_yellow, print_grey, print_cyan
+from ObjectPlacement.pyarma.common.colorsLog import (
+    print_error,
+    print_green,
+    print_magenta,
+    print_blue,
+    print_yellow,
+    print_grey,
+    print_cyan,
+)
 from ObjectPlacement.pyarma.common.copytree import copytree, copytree_extensionfilter
+
 
 def install_tools():
     from .installMikero import install
+
     install()
+
 
 class modToP(object):
     def __init__(self, targetpath):
         self.targetpath = targetpath
-        self.FNULL = open(os.devnull, 'w')
+        self.FNULL = open(os.devnull, "w")
         self.terrainmode = False
         self.purgemode = False
         self.modelsonly = False
@@ -37,8 +48,8 @@ class modToP(object):
 
     def create_ignore_list(self, targetpath):
         ignored_files = []
-        ignore_list = ['anims', 'dubbing', 'language', 'missions', 'ui_']
-        ignore_list_always = ['dubbing']
+        ignore_list = ["anims", "dubbing", "language", "missions", "ui_"]
+        ignore_list_always = ["dubbing"]
         files = glob.glob("*.pbo")
 
         for file in files:
@@ -47,7 +58,7 @@ class modToP(object):
             for i in ignore_names:
                 if i in filename:
                     ignored_files.append(file)
-                    #print("Ignoring {}".format(file))
+                    # print("Ignoring {}".format(file))
             if self.purgemode:
                 if file not in ignored_files:
                     if os.path.isdir(os.path.join(targetpath, filename)):
@@ -57,8 +68,9 @@ class modToP(object):
 
     def create_whitelist(self, targetpath):
         white_list_found = []
-        if not self.whitelist: return []
-        white_list = ['ww2_terrainsif_', 'ww2_terrainsww2_', 'ww2_terrainsi44_', 'ww2_objects_']
+        if not self.whitelist:
+            return []
+        white_list = ["ww2_terrainsif_", "ww2_terrainsww2_", "ww2_terrainsi44_", "ww2_objects_"]
         files = glob.glob("*.pbo")
 
         for file in files:
@@ -68,7 +80,6 @@ class modToP(object):
                     white_list_found.append(file)
                     print_green("Found {}".format(file))
         return white_list_found
-
 
     def pbo_unpack(self, file, filename):
         print_green("Unpacking {}".format(file))
@@ -82,7 +93,7 @@ class modToP(object):
                 targetpath = os.path.join(self.targetpath, folderunpack)
                 print_cyan("Copying {} to {}".format(folderunpack, targetpath))
                 if self.modelsonly:
-                    copytree_extensionfilter(os.path.join(source, folderunpack), targetpath, ['.p3d', '.cpp'])
+                    copytree_extensionfilter(os.path.join(source, folderunpack), targetpath, [".p3d", ".cpp"])
                 else:
                     copytree(os.path.join(source, folderunpack), targetpath)
 
@@ -98,11 +109,11 @@ class modToP(object):
         white_list = self.create_whitelist(self.targetpath)
 
         # Unpack all the PBOs and move their unpacked contents to P drive
-        print('\n')
+        print("\n")
         pbos = glob.glob("*.pbo")
         if self.test:
             pbos = pbos[:5]
-        print_magenta('### UNPACKING ###')
+        print_magenta("### UNPACKING ###")
         for file in pbos:
             filename = os.path.splitext(file)[0]
             if self.whitelist:
@@ -114,12 +125,15 @@ class modToP(object):
             else:
                 print_yellow("Skipping {}".format(filename))
 
+
 def main(args):
-    print_yellow("""
+    print_yellow(
+        """
   ##################
   #     ModToP     #
   ##################
-""")
+"""
+    )
 
     toolspath = os.path.dirname(os.path.realpath(__file__))
     if not (os.path.isdir(args.target)):
@@ -139,19 +153,45 @@ def main(args):
         if os.path.isdir(sourcepath):
             unpacker.mod_unpack(sourcepath)
         else:
-            print_error('Invalid path: {}'.format(sourcepath))
+            print_error("Invalid path: {}".format(sourcepath))
 
     repl = input("Press ANY key to exit")
 
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Mod depbo script')
-    parser.add_argument('-p', '--purge', help='Remove current files in target directory for this PBO', action="store_true", required=False, default=False)
-    parser.add_argument('-t', '--terrain', help='Extract only terrain files (Ignore missions, UI, etc)', action="store_true", required=False, default=True)
-    parser.add_argument('-wl', '--whitelist', help='Special Iron Front mode that unpacks only _terrain PBOs', action="store_true", required=False, default=False)
-    parser.add_argument('-m', '--models', help='Copies only models and configs', action="store_true", required=False, default=False)
-    parser.add_argument('--test', help='Test Mode, only does first 5 PBOs', action="store_true", required=False, default=False)
-    parser.add_argument('--target', help='Target path to unpack. Default is P drive', required=False, default='P:\\')
-    parser.add_argument('path', help='Path(s) to mod to extract', nargs='+')
+    parser = argparse.ArgumentParser(description="Mod depbo script")
+    parser.add_argument(
+        "-p",
+        "--purge",
+        help="Remove current files in target directory for this PBO",
+        action="store_true",
+        required=False,
+        default=False,
+    )
+    parser.add_argument(
+        "-t",
+        "--terrain",
+        help="Extract only terrain files (Ignore missions, UI, etc)",
+        action="store_true",
+        required=False,
+        default=True,
+    )
+    parser.add_argument(
+        "-wl",
+        "--whitelist",
+        help="Special Iron Front mode that unpacks only _terrain PBOs",
+        action="store_true",
+        required=False,
+        default=False,
+    )
+    parser.add_argument(
+        "-m", "--models", help="Copies only models and configs", action="store_true", required=False, default=False
+    )
+    parser.add_argument(
+        "--test", help="Test Mode, only does first 5 PBOs", action="store_true", required=False, default=False
+    )
+    parser.add_argument("--target", help="Target path to unpack. Default is P drive", required=False, default="P:\\")
+    parser.add_argument("path", help="Path(s) to mod to extract", nargs="+")
     args = parser.parse_args()
 
     install_tools()

@@ -84,11 +84,11 @@ class RandomOffset:
         write_tb(outpath, df_out)
 
 
-@Gooey
-def cli():
-    parser = RandomOffset.parser()
-    RandomOffset.run(parser.parse_args())
-
-
 if __name__ == "__main__":
+
+    @Gooey
+    def cli():
+        parser = RandomOffset.parser()
+        RandomOffset.run(parser.parse_args())
+
     cli()

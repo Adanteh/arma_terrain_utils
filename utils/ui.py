@@ -1,25 +1,36 @@
 import sys
 from pathlib import Path
 
+from gooey import Gooey, GooeyParser
+
 FOLDER = Path(__file__).parents[1]
 if str(FOLDER) not in sys.path:
     sys.path.insert(0, str(FOLDER))
 
-from gooey import Gooey, GooeyParser  # noqa: E402
+
 from utils.library.generate import Generate  # noqa: E402
 from utils.library.create_objects import CreateObjects  # noqa: E402
+from utils.process.tml_filter import TmlFilter  # noqa: E402
 
 
-@Gooey(optional_cols=2, program_name="Arma terrain utilities", advanced=True)
+@Gooey(advanced=True)
 def cli():
     parser = GooeyParser(description="Arma terrain utils")
-    subs = parser.add_subparsers(help="Commands", dest="command")
+    parent = parser.add_subparsers(help="Utilities", dest="command")
 
-    Generate.parser(subs)
-    CreateObjects.parser(subs)
+    TmlFilter.parser(parser=parser)
+    Generate.parser(parent=parent)
+    CreateObjects.parser(parent=parent)
+
     args = parser.parse_args()
-    Generate.run(args)
+
+    print(args)
+
+    Generate.run(args=args)
     CreateObjects.run(args)
+    TmlFilter.run(args)
+
+    return parser
 
 
 if __name__ == "__main__":

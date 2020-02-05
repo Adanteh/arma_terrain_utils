@@ -124,12 +124,10 @@ class folderToLibrary:
 
     def _write_duplicates(self):
         print(f"<error>Found {len(self.duplicates)} duplicate model names, they are autorenamed</error>")
-        print(
-            "This can cause model switching due to the nature of TB and some object placement mods (xcam, e2tb)"
-        )
+        print("This can cause model switching due to the nature of TB and some object placement mods (xcam, e2tb)")
 
         output: Path = self.output / "# duplicates.txt"
-        
+
         print(f"<error>Wrote duplicate names to {output}")
 
         with output.open(mode="w") as fp:
@@ -155,7 +153,7 @@ class Generate:
         if parent is None:
             parser = GooeyParser(description=cls.DESCRIPTION)
         else:
-            parser = parent.add_parser(cls.NAME, help=cls.DESCRIPTION)
+            parser = parent.add_parser(cls.NAME, help=cls.DESCRIPTION, metavar="1", description="Booga")
 
         parser.add_argument("--path", help="Path to walk through", widget="DirChooser", default="P:/a3", type=Path)
         parser.add_argument(
@@ -175,11 +173,12 @@ class Generate:
             required=False,
         )
         parser.add_argument(
-            "-o", "--output",
+            "-o",
+            "--output",
             help="Where to create the library",
             default=str(Path.cwd() / "Library"),
             type=Path,
-            widget="DirChooser"
+            widget="DirChooser",
         )
 
         return parser
@@ -190,11 +189,11 @@ class Generate:
             main(args)
 
 
-@Gooey
-def cli():
-    parser = Generate.parser()
-    Generate.run(parser.parse_args())
-
-
 if __name__ == "__main__":
+
+    @Gooey
+    def cli():
+        parser = Generate.parser()
+        Generate.run(parser.parse_args())
+
     cli()
