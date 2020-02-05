@@ -157,12 +157,12 @@ class Generate:
         else:
             parser = parent.add_parser(cls.NAME, help=cls.DESCRIPTION)
 
-        parser.add_argument("--path", help="Path to walk through", widget="DirChooser", default="P:\\a3", type=Path)
+        parser.add_argument("--path", help="Path to walk through", widget="DirChooser", default="P:/a3", type=Path)
         parser.add_argument(
             "--root",
             help="Workdrive path\n(This should be a parent of the base path!)",
             required=False,
-            default="P:\\",
+            default="P:/",
             widget="DirChooser",
             type=Path,
         )
@@ -171,7 +171,7 @@ class Generate:
             help="Ignore folder names containing entries in this list\n"
             "This list is pretty decent by default, only for pro users",
             nargs="+",
-            default=BLACKLIST,
+            default=" ".join(BLACKLIST),
             required=False,
         )
         parser.add_argument(
