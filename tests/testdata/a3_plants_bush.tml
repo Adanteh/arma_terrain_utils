@@ -1,0 +1,531 @@
+<?xml version="1.0" ?>
+<Library name="a3_plants_bush" shape="rectangle" default_fill="-16777216" default_outline="-65536" tex="0">
+    <Template>
+        <Name>bw_SetBig_Brains_F</Name>
+        <File>a3\plants_f\bush\bw_setbig_brains_f.p3d</File>
+        <Date>02/27/18 12:57:23</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>2.353066</BBRadius>
+        <BBHScale>1.010791</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>0.479123</Height>
+        <BoundingMin X="-2.516826" Y="-0.213399" Z="-2.867876" />
+        <BoundingMax X="2.240090" Y="0.744846" Z="1.838257" />
+        <BoundingCenter X="-0.138368" Y="0.265724" Z="-0.514810" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>bw_SetBig_corals_F</Name>
+        <File>a3\plants_f\bush\bw_setbig_corals_f.p3d</File>
+        <Date>02/27/18 12:57:26</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>2.061526</BBRadius>
+        <BBHScale>1.033964</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>0.437005</Height>
+        <BoundingMin X="-2.824320" Y="-0.203981" Z="-2.682445" />
+        <BoundingMax X="1.438766" Y="0.670028" Z="1.440607" />
+        <BoundingCenter X="-0.692777" Y="0.233024" Z="-0.620919" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>bw_SetBig_TubeG_F</Name>
+        <File>a3\plants_f\bush\bw_setbig_tubeg_f.p3d</File>
+        <Date>02/27/18 12:57:29</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>2.171870</BBRadius>
+        <BBHScale>1.188509</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>0.501676</Height>
+        <BoundingMin X="-2.414778" Y="-0.154919" Z="-2.569967" />
+        <BoundingMax X="2.747797" Y="0.848434" Z="1.773773" />
+        <BoundingCenter X="0.166509" Y="0.346758" Z="-0.398097" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>bw_SetBig_TubeY_F</Name>
+        <File>a3\plants_f\bush\bw_setbig_tubey_f.p3d</File>
+        <Date>02/27/18 12:57:31</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>2.105651</BBRadius>
+        <BBHScale>1.388928</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>0.466026</Height>
+        <BoundingMin X="-3.044866" Y="-0.134158" Z="-1.854780" />
+        <BoundingMax X="2.804331" Y="0.797894" Z="2.356522" />
+        <BoundingCenter X="-0.120267" Y="0.331868" Z="0.250871" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>bw_SetSmall_Brains_F</Name>
+        <File>a3\plants_f\bush\bw_setsmall_brains_f.p3d</File>
+        <Date>02/27/18 12:57:32</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>1.738178</BBRadius>
+        <BBHScale>0.841646</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>0.534095</Height>
+        <BoundingMin X="-1.006118" Y="-0.145065" Z="-1.974295" />
+        <BoundingMax X="1.919744" Y="0.923126" Z="1.502061" />
+        <BoundingCenter X="0.456813" Y="0.389030" Z="-0.236117" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>bw_SetSmall_TubeG_F</Name>
+        <File>a3\plants_f\bush\bw_setsmall_tubeg_f.p3d</File>
+        <Date>02/27/18 12:57:34</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>1.891408</BBRadius>
+        <BBHScale>1.062763</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>0.528956</Height>
+        <BoundingMin X="-1.293593" Y="-0.209477" Z="-1.555280" />
+        <BoundingMax X="2.726645" Y="0.848434" Z="2.227536" />
+        <BoundingCenter X="0.716526" Y="0.319478" Z="0.336128" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>bw_SetSmall_TubeY_F</Name>
+        <File>a3\plants_f\bush\bw_setsmall_tubey_f.p3d</File>
+        <Date>02/27/18 12:57:35</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>1.366945</BBRadius>
+        <BBHScale>1.288828</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>0.531235</Height>
+        <BoundingMin X="-1.787709" Y="-0.264575" Z="-1.062678" />
+        <BoundingMax X="1.735805" Y="0.797894" Z="1.671212" />
+        <BoundingCenter X="-0.025952" Y="0.266660" Z="0.304267" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>b_ArundoD2s_F</Name>
+        <File>a3\plants_f\bush\b_arundod2s_f.p3d</File>
+        <Date>02/27/18 12:57:36</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>4.024639</BBRadius>
+        <BBHScale>0.992641</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>4.213063</Height>
+        <BoundingMin X="-3.867629" Y="-4.188561" Z="-4.180261" />
+        <BoundingMax X="4.122411" Y="4.237564" Z="3.869016" />
+        <BoundingCenter X="0.127391" Y="0.024501" Z="-0.155622" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>b_ArundoD3s_F</Name>
+        <File>a3\plants_f\bush\b_arundod3s_f.p3d</File>
+        <Date>02/27/18 12:57:36</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>8.049277</BBRadius>
+        <BBHScale>0.992641</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>8.426126</Height>
+        <BoundingMin X="-7.735258" Y="-5.477124" Z="-8.360522" />
+        <BoundingMax X="8.244822" Y="11.375130" Z="7.738032" />
+        <BoundingCenter X="0.254782" Y="2.949003" Z="-0.311245" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>b_FicusC1s_F</Name>
+        <File>a3\plants_f\bush\b_ficusc1s_f.p3d</File>
+        <Date>02/27/18 12:57:37</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>4.192775</BBRadius>
+        <BBHScale>0.879721</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>0.000000</Height>
+        <BoundingMin X="-2.964544" Y="-0.609477" Z="-3.484091" />
+        <BoundingMax X="4.412404" Y="3.274172" Z="4.901460" />
+        <BoundingCenter X="0.723930" Y="1.332348" Z="0.708684" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>b_ficusC2d_F</Name>
+        <File>a3\plants_f\bush\b_ficusc2d_f.p3d</File>
+        <Date>02/27/18 12:57:38</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>2.286916</BBRadius>
+        <BBHScale>1.054637</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>2.017855</Height>
+        <BoundingMin X="-2.524050" Y="-0.694010" Z="-1.944953" />
+        <BoundingMax X="2.299680" Y="3.341700" Z="2.628878" />
+        <BoundingCenter X="-0.112185" Y="1.323845" Z="0.341962" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>b_FicusC2s_F</Name>
+        <File>a3\plants_f\bush\b_ficusc2s_f.p3d</File>
+        <Date>02/27/18 12:57:44</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>4.308873</BBRadius>
+        <BBHScale>0.778852</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>2.222237</Height>
+        <BoundingMin X="-3.101724" Y="-1.006107" Z="-5.376985" />
+        <BoundingMax X="3.610220" Y="3.438368" Z="3.240762" />
+        <BoundingCenter X="0.254248" Y="1.216131" Z="-1.068112" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>b_NeriumO2d_F</Name>
+        <File>a3\plants_f\bush\b_neriumo2d_f.p3d</File>
+        <Date>02/27/18 12:57:46</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>1.977482</BBRadius>
+        <BBHScale>0.965220</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>0.000000</Height>
+        <BoundingMin X="-1.702281" Y="-0.512957" Z="-1.785590" />
+        <BoundingMax X="2.115130" Y="2.229582" Z="2.169374" />
+        <BoundingCenter X="0.206425" Y="0.858312" Z="0.191892" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>b_NeriumO2s_F</Name>
+        <File>a3\plants_f\bush\b_neriumo2s_f.p3d</File>
+        <Date>02/27/18 12:57:46</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>2.125674</BBRadius>
+        <BBHScale>1.047375</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>0.000000</Height>
+        <BoundingMin X="-2.404309" Y="-0.512957" Z="-2.143147" />
+        <BoundingMax X="2.048448" Y="2.117401" Z="2.108202" />
+        <BoundingCenter X="-0.177931" Y="0.802222" Z="-0.017473" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>b_NeriumO2s_white_F</Name>
+        <File>a3\plants_f\bush\b_neriumo2s_white_f.p3d</File>
+        <Date>02/27/18 12:57:48</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>2.125674</BBRadius>
+        <BBHScale>1.047375</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>1.315179</Height>
+        <BoundingMin X="-2.404309" Y="-0.512957" Z="-2.143147" />
+        <BoundingMax X="2.048448" Y="2.117401" Z="2.108202" />
+        <BoundingCenter X="-0.177931" Y="0.802222" Z="-0.017473" />
+        <Placement></Placement>
+    </Template>
+    <Template>
+        <Name>b_Thistle_Thorn_Green</Name>
+        <File>a3\plants_f\bush\b_thistle_thorn_green.p3d</File>
+        <Date>02/27/18 12:57:48</Date>
+        <Archive></Archive>
+        <Fill>-16760832</Fill>
+        <Outline>-1</Outline>
+        <Scale>1.000000</Scale>
+        <Hash>-221257886</Hash>
+        <ScaleRandMin>0.000000</ScaleRandMin>
+        <ScaleRandMax>0.000000</ScaleRandMax>
+        <YawRandMin>0.000000</YawRandMin>
+        <YawRandMax>0.000000</YawRandMax>
+        <PitchRandMin>0.000000</PitchRandMin>
+        <PitchRandMax>0.000000</PitchRandMax>
+        <RollRandMin>0.000000</RollRandMin>
+        <RollRandMax>0.000000</RollRandMax>
+        <TexLLU>0.000000</TexLLU>
+        <TexLLV>0.000000</TexLLV>
+        <TexURU>1.000000</TexURU>
+        <TexURV>1.000000</TexURV>
+        <BBRadius>0.819636</BBRadius>
+        <BBHScale>1.016082</BBHScale>
+        <AutoCenter>1</AutoCenter>
+        <XShift>-0.000000</XShift>
+        <YShift>-0.000000</YShift>
+        <ZShift>-0.000000</ZShift>
+        <Height>0.466432</Height>
+        <BoundingMin X="-0.819636" Y="-0.172500" Z="-0.819636" />
+        <BoundingMax X="0.845999" Y="0.760364" Z="0.819636" />
+        <BoundingCenter X="0.013181" Y="0.293932" Z="0.000000" />
+        <Placement></Placement>
+    </Template>
+</Library>

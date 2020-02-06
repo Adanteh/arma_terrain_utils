@@ -24,12 +24,9 @@ def cli():
 
     args = parser.parse_args()
 
-    print(args)
-
     Generate.run(args=args)
     CreateObjects.run(args)
     TmlFilter.run(args)
-
     return parser
 
 

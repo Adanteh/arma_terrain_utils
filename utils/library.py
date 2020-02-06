@@ -23,6 +23,22 @@ def dict_keys_lower(iterable: Union[OrderedDict, dict, list]):
     return newdict
 
 
+def tbcolor_to_hex(number: int) -> "str":
+    """Converts inverted hexidemical to a normal hex color code"""
+    uninverted_decimal = number - int("0xffffff", 16)
+    hexed = hex(uninverted_decimal).split("x")[-1]
+    table = "ok".maketrans("0123456789abcdef", "fedcba9876543210")
+    inverted = "#" + hexed[1:].lower().translate(table).upper()
+    return inverted
+
+
+def tbcolor_to_rgba(number: int, alpha=255) -> Tuple[int]:
+    """Converts weird tb color format to 255 rgba"""
+    hex_color = tbcolor_to_hex(number)[1:]
+    rgb = tuple(int(hex_color[i : i + 2], 16) for i in (0, 2, 4))
+    return (*rgb, alpha)
+
+
 @dataclass
 class ModelEntry:
     name: str
@@ -50,11 +66,15 @@ class ModelEntry:
         x_min, y_min, z_min = (float(f) for f in values["boundingmin"].values())
         return (x_max - x_min, y_max - y_min, z_max - z_min)
 
+    def as_shape(self):
+        """Returns as (`name`, `rgba_fill`, `rgba_outline`, `size`)"""
+        return (self.name, tbcolor_to_rgba(self.fill), tbcolor_to_rgba(self.outline), self.size)
+
 
 class TbLibraryCollection:
     def __init__(self, folder: Path):
-        self.libraries: List[TbLibrary] = self.load_libraries()
-        self._dict = self.cache(self.libraries)
+        self.libraries: List[TbLibrary] = self.load_libraries(folder)
+        self._lib, self._entries = self.cache(self.libraries)
 
     def load_libraries(self, folder: Path):
         libraries = []
@@ -63,21 +83,28 @@ class TbLibraryCollection:
         return libraries
 
     def cache(self, libraries):
-        _cache = {}
+        _lib_cache = {}
+        _entry_cache = {}
         for lib in libraries:
             for entry in lib:
-                _cache[entry.model.lower()] = lib.name
-        return _cache
+                _lib_cache[entry.name.lower()] = lib.name
+                _entry_cache[entry.name.lower()] = entry
+        return _lib_cache, _entry_cache
 
     def __iter__(self):
         for i in self.libraries:
             yield i
 
-    def get_category(self, model: str):
-        return self._dict[model.lower()]
+    def get_category(self, name: str) -> str:
+        """Gets the library name from model"""
+        return self._lib[name.lower()]
+
+    def get_entry(self, name: str) -> ModelEntry:
+        """Gets the ModelEntry from model"""
+        return self._entries[name.lower()]
 
     def __getitem__(self, key: str):
-        return self._dict[key.lower()]
+        return self.get_entry(key)
 
 
 class TbLibrary:
