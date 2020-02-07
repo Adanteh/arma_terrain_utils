@@ -5,6 +5,7 @@ import unittest
 
 folder: Path = Path(__file__).parent / "testdata"
 
+
 class TestLibrary(unittest.TestCase):
     def test_loading(self):
         library = TbLibrary.from_file(folder / "a3_plants_bush.tml")
@@ -19,7 +20,7 @@ class TestLibrary(unittest.TestCase):
         library = TbLibrary.from_file(folder / "a3_plants_plant.tml")
         model: ModelEntry = list(library)[0]
 
-        self.assertEqual(model.name, "bw_SetBig_Brains_F")
+        self.assertEqual(model.name, "p_Reeds_F")
         self.assertFalse(model.landslope)
 
 
@@ -29,8 +30,9 @@ class TestLibraryCollection(unittest.TestCase):
         entry: ModelEntry = library["bw_SetBig_Brains_F"]
         self.assertEqual(entry.name, "bw_SetBig_Brains_F")
 
-        category = library.get_category('P_Reeds_F')
+        category = library.get_category("P_Reeds_F")
         self.assertEqual(category, "a3_plants_plant")
+
 
 if __name__ == "__main__":
     unittest.main()

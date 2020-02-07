@@ -55,10 +55,14 @@ def action(df: DataFrame, args) -> DataFrame:
 
 class RandomOffset:
     DESCRIPTION = "Adds random offset for each line in a TB file"
+    NAME = "(Random) offset"
 
     @classmethod
     def parser(cls, parent=None):
-        parser = GooeyParser(description=cls.DESCRIPTION)
+        if parent is None:
+            parser = GooeyParser(description=cls.DESCRIPTION)
+        else:
+            parser = parent.add_parser(cls.NAME, help=cls.DESCRIPTION)
         parser.add_argument("source", help="Input TB file", widget="FileChooser", type=Path)
 
         # Randomness

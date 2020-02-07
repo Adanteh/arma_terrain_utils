@@ -27,6 +27,7 @@ class NearbyFiltering:
     DESCRIPTION = (
         "Allows you to automatically delete objects in a file, when they are closer than X distance to another file"
     )
+    NAME = "Filter nearby"
 
     def __init__(self, radius: float, source: DataFrame, target: DataFrame):
         self.r = radius
@@ -57,8 +58,11 @@ class NearbyFiltering:
         return nearby
 
     @classmethod
-    def parser(cls):
-        parser = GooeyParser(description=cls.DESCRIPTION)
+    def parser(cls, parent=None):
+        if parent is None:
+            parser = GooeyParser(description=cls.DESCRIPTION)
+        else:
+            parser = parent.add_parser(cls.NAME, help=cls.DESCRIPTION)
         parser.add_argument(
             "source", help="The TB file you want to compare distances to", type=Path, widget="FileChooser"
         )

@@ -12,8 +12,11 @@ from utils.library import TbLibrary, ModelEntry  # noqa: E402
 
 
 class CreateObjects:
-    DESCRIPTION = "Creates an object for every single entry in library files"
-    NAME = "create"
+    DESCRIPTION = (
+        "Creates an object for every single entry in library files\n"
+        + "Mainly used to allow TerrainBuilder to fill the library files with extra details"
+    )
+    NAME = "Create library objects"
     LOCATION_OFFSET = (200000.0, 0.0)
 
     @classmethod

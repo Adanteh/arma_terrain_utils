@@ -11,6 +11,8 @@ if str(FOLDER) not in sys.path:
 from utils.process.library.generate import Generate  # noqa: E402
 from utils.process.library.create_objects import CreateObjects  # noqa: E402
 from utils.process.tml_filter import TmlFilter  # noqa: E402
+from utils.process.add_objects import AddExtraObject  # noqa: E402
+from utils.process.filter_nearby import NearbyFiltering  # noqa: E402
 
 
 @Gooey(advanced=True)
@@ -21,12 +23,17 @@ def cli():
     TmlFilter.parser(parser=parser)
     Generate.parser(parent=parent)
     CreateObjects.parser(parent=parent)
+    AddExtraObject.parser(parent=parent)
+    NearbyFiltering.parser(parent=parent)
 
     args = parser.parse_args()
 
-    Generate.run(args=args)
-    CreateObjects.run(args)
     TmlFilter.run(args)
+    Generate.run(args=args)
+    CreateObjects.run(args=args)
+    AddExtraObject.run(args=args)
+    NearbyFiltering.run(args=args)
+
     return parser
 
 

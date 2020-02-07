@@ -146,7 +146,7 @@ def main(args):
 
 class Generate:
     DESCRIPTION = "Generates Terrain Builder template files from walking through folders"
-    NAME = "generate"
+    NAME = "Create library"
 
     @classmethod
     def parser(cls, parent=None):

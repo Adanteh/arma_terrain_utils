@@ -45,11 +45,17 @@ class TbRow:
     z: float = 0.0
     end: str = ";"
 
-    def as_line(self):
+    def as_line(self) -> str:
         """Properly formatted line for a TB file"""
         values = list(self)
         values[0] = f'"{values[0]}"'  # Quotes around the model
         return ";".join((str(f) for f in values)) + self.end
+
+    @classmethod
+    def from_line(cls, line: str) -> "TbRow":
+        """Creates TB entry from line in a TB file"""
+        values = line.strip("\n").split(";")
+        cls(*values)
 
     def __iter__(self):
         return iter(astuple(self)[:-1])
@@ -72,4 +78,3 @@ def write_tb(path: Path, df: DataFrame):
     # Require quotes around model. In theory quoting=QUOTE_NONNUMERIC should work, but its broken for formatted floats
     df.update(df[["model"]].applymap('"{}"'.format))
     df.to_csv(path, header=False, index=False, sep=";", quoting=QUOTE_NONE, float_format=float_format)
-
