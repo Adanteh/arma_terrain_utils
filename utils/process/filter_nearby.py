@@ -40,7 +40,7 @@ class NearbyFiltering:
         if parent is None:
             parser = GooeyParser(description=cls.DESCRIPTION)
         else:
-            sub = parent.add_parser(cls.NAME)
+            sub = parent.add_parser(cls.__name__)
             parser = sub.add_argument_group(cls.NAME, description=cls.DESCRIPTION, gooey_options={"show_border": True})
 
         parser.add_argument(
@@ -52,6 +52,9 @@ class NearbyFiltering:
 
     @classmethod
     def run(cls, args):
+        if not hasattr(args, "command") or args.command != cls.__name__:
+            return
+            
         source = load_tb(args.source)
         target = load_tb(args.target)
 

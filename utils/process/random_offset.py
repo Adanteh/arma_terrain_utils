@@ -62,7 +62,7 @@ class RandomOffset:
         if parent is None:
             parser = GooeyParser(description=cls.DESCRIPTION)
         else:
-            sub = parent.add_parser(cls.NAME)
+            sub = parent.add_parser(cls.__name__)
             parser = sub.add_argument_group(cls.NAME, description=cls.DESCRIPTION, gooey_options={"show_border": True})
 
         parser.add_argument("source", help="Input TB file", widget="FileChooser", type=Path)
@@ -84,6 +84,9 @@ class RandomOffset:
 
     @classmethod
     def run(cls, args):
+        if not hasattr(args, "command") or args.command != cls.__name__:
+            return
+
         df = load_tb(args.source)
         df_out = action(df=df, args=args)
         outpath = args.source.with_name(args.source.stem + "_OUT.txt")

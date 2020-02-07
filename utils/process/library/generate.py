@@ -156,7 +156,7 @@ class Generate:
         if parent is None:
             parser = GooeyParser(description=cls.DESCRIPTION)
         else:
-            sub = parent.add_parser(cls.NAME)
+            sub = parent.add_parser(cls.__name__)
             parser = sub.add_argument_group(cls.NAME, description=cls.DESCRIPTION, gooey_options={"show_border": True})
 
         parser.add_argument("--path", help="Path to walk through", widget="DirChooser", default="P:/a3", type=Path)
@@ -189,7 +189,7 @@ class Generate:
 
     @classmethod
     def run(cls, args):
-        if not hasattr(args, "command") or args.command == cls.NAME:
+        if not hasattr(args, "command") or args.command == cls.__name__:
             main(args)
 
 

@@ -27,7 +27,7 @@ class AddExtraObject:
         if parent is None:
             parser = GooeyParser(description=cls.DESCRIPTION)
         else:
-            sub = parent.add_parser(cls.NAME)
+            sub = parent.add_parser(cls.__name__)
             parser = sub.add_argument_group(cls.NAME, description=cls.DESCRIPTION, gooey_options={"show_border": True})
 
         parser.add_argument("--input", help="File to process", widget="FileChooser", type=Path, required=True)
@@ -39,6 +39,9 @@ class AddExtraObject:
 
     @classmethod
     def run(cls, args):
+        if not hasattr(args, "command") or args.command != cls.__name__:
+            return
+
         file_in = args.input
         file_out = args.input.parent / args.input.stem + "_out.txt"
         target_model = args.target.lower()
