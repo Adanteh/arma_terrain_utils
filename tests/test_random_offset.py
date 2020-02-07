@@ -1,23 +1,29 @@
 import unittest
 import sys
 import subprocess
-from utils.ui import cli, FOLDER
-from utils import ui
 from pathlib import Path
+
+from utils.process import random_offset
 
 file = Path(__file__)
 
 
-class TestGooeyUI(unittest.TestCase):
-    def test_gooey_ui(self):
+class TestRandomOffset(unittest.TestCase):
+    def test_random_offset(self):
         try:
             # fmt: off
             args = [
                 sys.executable,
-                ui.__file__,
+                random_offset.__file__,
                 "--ignore-gooey",
-                "Generate",
-                "-o", str(file.parent / "testresults" / "library")
+                str(file.parent / "testdata" / "test_tb_file.txt"),
+                "-dir", "10",
+                "-p", "1.0",
+                "-zr", "1",
+                "-s", "0.2",
+                "-x", "1000",
+                "-y", "10", 
+                "-z", "2",
             ]
             # fmt: on
             output = subprocess.check_output(args)
