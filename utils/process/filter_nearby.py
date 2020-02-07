@@ -52,9 +52,9 @@ class NearbyFiltering:
 
     @classmethod
     def run(cls, args):
-        if not hasattr(args, "command") or args.command != cls.__name__:
+        if hasattr(args, "command") and args.command != cls.__name__:
             return
-            
+
         source = load_tb(args.source)
         target = load_tb(args.target)
 

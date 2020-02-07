@@ -39,7 +39,7 @@ class AddExtraObject:
 
     @classmethod
     def run(cls, args):
-        if not hasattr(args, "command") or args.command != cls.__name__:
+        if hasattr(args, "command") and args.command != cls.__name__:
             return
 
         file_in = args.input

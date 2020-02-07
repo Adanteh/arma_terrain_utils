@@ -47,10 +47,12 @@ class CreateObjects:
 
     @classmethod
     def run(cls, args):
-        if not hasattr(args, "command") or args.command == cls.__name__:
-            obj = cls(args)
-            obj.create_objects()
-            obj.final()
+        if hasattr(args, "command") and args.command != cls.__name__:
+            return
+
+        obj = cls(args)
+        obj.create_objects()
+        obj.final()
 
     def create_objects(self):
         with self.args.output.open(mode="w") as fp:

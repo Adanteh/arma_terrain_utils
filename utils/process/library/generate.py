@@ -189,8 +189,10 @@ class Generate:
 
     @classmethod
     def run(cls, args):
-        if not hasattr(args, "command") or args.command == cls.__name__:
-            main(args)
+        if hasattr(args, "command") and args.command != cls.__name__:
+            return
+            
+        main(args)
 
 
 if __name__ == "__main__":

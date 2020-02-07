@@ -1,7 +1,6 @@
 import unittest
 import sys
 import subprocess
-from utils.ui import cli, FOLDER
 from utils import ui
 from pathlib import Path
 
