@@ -35,6 +35,32 @@ class NearbyFiltering:
         self.target = target
         self.tree = self.create_tree(self.source)
 
+    @classmethod
+    def parser(cls, parent=None):
+        if parent is None:
+            parser = GooeyParser(description=cls.DESCRIPTION)
+        else:
+            sub = parent.add_parser(cls.NAME)
+            parser = sub.add_argument_group(cls.NAME, description=cls.DESCRIPTION, gooey_options={"show_border": True})
+
+        parser.add_argument(
+            "source", help="The TB file you want to compare distances to", type=Path, widget="FileChooser"
+        )
+        parser.add_argument("target", help="The file you want to filter", type=Path, widget="FileChooser")
+        parser.add_argument("-r", "--radius", help="Radius", type=float, default=4)
+        return parser
+
+    @classmethod
+    def run(cls, args):
+        source = load_tb(args.source)
+        target = load_tb(args.target)
+
+        obj = cls(args.radius, source=source, target=args.target)
+        out = obj.filter_new()
+
+        outpath = args.target.with_name(args.target.stem + "_OUT.txt")
+        write_tb(outpath, out)
+
     def create_tree(self, df: DataFrame):
         tree = spatial.cKDTree(df[["x", "y"]].values)
         return tree
@@ -56,30 +82,6 @@ class NearbyFiltering:
 
         nearby = self.tree.query_ball_point(point, radius)
         return nearby
-
-    @classmethod
-    def parser(cls, parent=None):
-        if parent is None:
-            parser = GooeyParser(description=cls.DESCRIPTION)
-        else:
-            parser = parent.add_parser(cls.NAME, help=cls.DESCRIPTION)
-        parser.add_argument(
-            "source", help="The TB file you want to compare distances to", type=Path, widget="FileChooser"
-        )
-        parser.add_argument("target", help="The file you want to filter", type=Path, widget="FileChooser")
-        parser.add_argument("-r", "--radius", help="Radius", type=float, default=4)
-        return parser
-
-    @classmethod
-    def run(cls, args):
-        source = load_tb(args.source)
-        target = load_tb(args.target)
-
-        obj = cls(args.radius, source=source, target=args.target)
-        out = obj.filter_new()
-
-        outpath = args.target.with_name(args.target.stem + "_OUT.txt")
-        write_tb(outpath, out)
 
 
 if __name__ == "__main__":

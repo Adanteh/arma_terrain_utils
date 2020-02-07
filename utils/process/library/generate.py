@@ -14,7 +14,7 @@ from pathlib import Path
 import xmltodict
 from gooey import Gooey, GooeyParser
 
-FOLDER = Path(__file__).parents[2]
+FOLDER = Path(__file__).parents[3]
 if str(FOLDER) not in sys.path:
     sys.path.insert(0, str(FOLDER))
 
@@ -145,7 +145,10 @@ def main(args):
 
 
 class Generate:
-    DESCRIPTION = "Generates Terrain Builder template files from walking through folders"
+    DESCRIPTION = (
+        "Generates Terrain Builder template files from walking through folders\n"
+        + "This will group up based on subfolder names and automatically assign colors based on some preset names"
+    )
     NAME = "Create library"
 
     @classmethod
@@ -153,7 +156,8 @@ class Generate:
         if parent is None:
             parser = GooeyParser(description=cls.DESCRIPTION)
         else:
-            parser = parent.add_parser(cls.NAME, help=cls.DESCRIPTION)
+            sub = parent.add_parser(cls.NAME)
+            parser = sub.add_argument_group(cls.NAME, description=cls.DESCRIPTION, gooey_options={"show_border": True})
 
         parser.add_argument("--path", help="Path to walk through", widget="DirChooser", default="P:/a3", type=Path)
         parser.add_argument(

@@ -27,7 +27,9 @@ class AddExtraObject:
         if parent is None:
             parser = GooeyParser(description=cls.DESCRIPTION)
         else:
-            parser = parent.add_parser(cls.NAME, help=cls.DESCRIPTION)
+            sub = parent.add_parser(cls.NAME)
+            parser = sub.add_argument_group(cls.NAME, description=cls.DESCRIPTION, gooey_options={"show_border": True})
+
         parser.add_argument("--input", help="File to process", widget="FileChooser", type=Path, required=True)
         parser.add_argument("--target", help="Model to add extra objects near", required=True, default="t_Inocarpus_F")
         parser.add_argument("--model", help="Which model to place", required=True, default="b_Leucaena_F")

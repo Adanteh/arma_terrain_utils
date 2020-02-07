@@ -2,7 +2,7 @@ import unittest
 
 
 class TestAddObjects(unittest.TestCase):
-    def test_call():
+    def test_call(self):
         pass
 
 
