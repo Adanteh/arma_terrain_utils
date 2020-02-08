@@ -14,6 +14,7 @@ from utils.process.tml_filter import TmlFilter  # noqa: E402
 from utils.process.add_objects import AddExtraObject  # noqa: E402
 from utils.process.filter_nearby import NearbyFiltering  # noqa: E402
 from utils.process.random_offset import RandomOffset  # noqa: E402
+from utils.process.extract_pbos import ExtractPBOs  # noqa: E402
 
 
 @Gooey(advanced=True)
@@ -27,6 +28,7 @@ def cli():
     AddExtraObject.parser(parent=parent)
     NearbyFiltering.parser(parent=parent)
     RandomOffset.parser(parent=parent)
+    ExtractPBOs.parser(parent=parent)
 
     args = parser.parse_args()
 
@@ -36,6 +38,7 @@ def cli():
     AddExtraObject.run(args=args)
     NearbyFiltering.run(args=args)
     RandomOffset.run(args=args)
+    ExtractPBOs.run(args=args)
 
     return parser
 

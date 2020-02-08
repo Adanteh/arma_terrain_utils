@@ -30,7 +30,7 @@ class ExtractPBOs:
             parser = sub.add_argument_group(cls.NAME, description=cls.DESCRIPTION, gooey_options={"show_border": True})
 
         parser.add_argument("source", help="Folder with PBOs to unpack", widget="DirChooser", type=Path)
-        parser.add_argument("target", help="Where to unpack", widget="DirChooser", type=Path, default="P:\\")
+        parser.add_argument("target", help="Where to unpack", widget="DirChooser", type=Path, default="P:/")
         parser.add_argument(
             "-m", "--models", help="Copies only models and configs", action="store_true", required=False, default=False
         )
@@ -149,7 +149,7 @@ class ExtractPBOs:
                 print(f"Copying {f} to {target}")
                 copytree(f, target, include=include)
 
-                shutil.rmtree(f)
+            shutil.rmtree(unpacked)
         else:
             return 1
 

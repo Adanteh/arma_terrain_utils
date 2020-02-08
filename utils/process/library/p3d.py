@@ -36,6 +36,6 @@ def boundingbox(path: Path) -> bool:
         bool: True if slopeLandContact property is fo und
     """
 
-    result = subprocess.check_output(["dep3d", "-LD", str(path)])
+    result = subprocess.check_output(["dep3d", "-LB", str(path)])
     bb_min = result.lower().find("box min")
     bb_max = result.lower().find("box max")
