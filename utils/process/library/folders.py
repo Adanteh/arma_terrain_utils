@@ -25,6 +25,8 @@ BLACKLIST = [
     "tracked",
     "wheeled",
     "proxy",  # A2 stuff from CUP
+    "roads_new",
+    "test_roadsa"
 ]
 
 
