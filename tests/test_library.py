@@ -1,7 +1,7 @@
-from pathlib import Path
-from utils.library import TbLibrary, TbLibraryCollection, ModelEntry
-
 import unittest
+from pathlib import Path
+
+from utils.library import ModelEntry, TbLibrary, TbLibraryCollection
 
 folder: Path = Path(__file__).parent / "testdata"
 

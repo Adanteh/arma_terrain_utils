@@ -1,28 +1,6 @@
-from csv import QUOTE_NONE, QUOTE_NONNUMERIC  # noqa: F401
 from pathlib import Path
 from dataclasses import dataclass, astuple
-from typing import Union
-from collections import OrderedDict
-
-import pandas as pd
-from pandas import DataFrame
-
-
-def dict_keys_lower(iterable: Union[OrderedDict, dict, list]):
-    """Renames all key in orderdeddict recursively to lowercase"""
-    newdict = type(iterable)()
-    if type(iterable) in (dict, OrderedDict):
-        for key in iterable.keys():
-            newdict[key.lower()] = iterable[key]
-            if type(iterable[key]) in (dict, list, OrderedDict):
-                newdict[key.lower()] = dict_keys_lower(iterable[key])
-    elif type(iterable) is list:
-        for item in iterable:
-            item = dict_keys_lower(item)
-            newdict.append(item)
-    else:
-        return iterable
-    return newdict
+from typing import Generator
 
 
 NAMES = ("model", "x", "y", "dir", "pitch", "bank", "scale", "z", "end")
@@ -54,11 +32,23 @@ class TbRow:
     @classmethod
     def from_line(cls, line: str) -> "TbRow":
         """Creates TB entry from line in a TB file"""
-        values = line.strip("\n").split(";")
-        cls(*values)
+        values = line.strip("\n").replace('"', "").split(";")
+        return cls(*values)
 
     def __iter__(self):
         return iter(astuple(self)[:-1])
+
+
+def tb_iterator(path: Path) -> Generator[TbRow, None, None]:
+    """Loads in an object file, and yields `TbRow` objects"""
+    with path.open(mode="r") as fp:
+        for line in fp:
+            yield TbRow.from_line(line)
+
+
+from csv import QUOTE_NONE, QUOTE_NONNUMERIC  # noqa: F401, E402
+import pandas as pd  # noqa: E402
+from pandas import DataFrame  # noqa: E402
 
 
 def load_tb(path: Path) -> DataFrame:
