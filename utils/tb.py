@@ -23,6 +23,13 @@ class TbRow:
     z: float = 0.0
     end: str = ";"
 
+    def __post_init__(self):
+        """Change all values to the set type in our field definitions"""
+        for name, field_type in self.__annotations__.items():
+            if not isinstance(self.__dict__[name], field_type):
+                setattr(self, name, field_type(self.__dict__[name]))
+
+
     def as_line(self) -> str:
         """Properly formatted line for a TB file"""
         values = list(self)

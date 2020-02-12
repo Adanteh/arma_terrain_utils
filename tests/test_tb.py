@@ -11,6 +11,10 @@ class TestTB(unittest.TestCase):
         entries: List[TbRow] = list(tb_iterator(folder / "test_tb_file.txt"))
         self.assertEqual(entries[0].model, "bw_SetBig_Brains_F")
         self.assertEqual(entries[-1].model, "p_Reeds_F")
+    
+    def test_from_line(self):
+        entry = TbRow.from_line('"bw_SetBig_Brains_F";200003.0;6.0;0.0;0.0;0.0;1.0;0.0;')
+        self.assertIsInstance(entry.x, float)
 
     # def test_iterator_invalid(self):
     #     with self.assertRaises(FileNotFoundError):
