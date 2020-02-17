@@ -1,6 +1,6 @@
 from pathlib import Path
 from dataclasses import dataclass
-from typing import List, Union, Tuple
+from typing import List, Union, Tuple, Dict
 from collections import OrderedDict
 
 import xmltodict
@@ -110,14 +110,28 @@ class TbLibraryCollection:
 class TbLibrary:
     """This represents a single .tml file"""
 
-    def __init__(self, library: dict, *args, **kwargs):
+    def __init__(self, library: dict, *args, path=None, **kwargs):
         super().__init__(*args, **kwargs)
 
-        entries = self.__fix(library)
+        self.__fix(library)
         self._dict = library  # Unedited xmldict
-        self.entries: List[ModelEntry] = [ModelEntry.from_library(entry) for entry in entries]
-        self.name = library["Library"]["@name"]
-        self.shape = library["Library"]["@shape"]
+        self._dictlower: Dict[str, OrderedDict] = {}
+
+        self.entries: Dict[str, ModelEntry] = {}
+        for entry in library["Library"]["Template"]:
+            model = ModelEntry.from_library(entry)
+            self.entries[model.name] = model
+            self._dictlower[model.name.lower()] = entry
+
+        self.path = None
+
+    @property
+    def name(self):
+        return self._dict["Library"]["@name"]
+
+    @property
+    def shape(self):
+        return self._dict["Library"]["@shape"]
 
     @classmethod
     def from_file(cls, path: Path) -> "TbLibrary":
@@ -127,7 +141,17 @@ class TbLibrary:
 
         with path.open(mode="r") as fp:
             library = xmltodict.parse(fp.read())
-        return cls(library)
+        return cls(library, path=path)
+
+    def save(self, path: Union[Path, None] = None):
+        """Write the dict back to a file. If `path` is not given it'll use the path is was opened with (If available)"""
+        if path is None:
+            path = self.path
+            if path is None:
+                raise Exception(f"No path given to save {self}")
+
+        with path.open(mode="w") as fp:
+            xmltodict.unparse(self._dict, output=fp, pretty=True)
 
     def __fix(self, library) -> List[dict]:
         """Fixes usual discrepancies between different template files"""
@@ -139,7 +163,7 @@ class TbLibrary:
                 entries = [library["Library"]["Template"]]
             except KeyError:
                 entries = []
-        return entries
+        library["Library"]["Template"] = entries
 
     def __len__(self):
         return len(self.entries)
@@ -148,5 +172,9 @@ class TbLibrary:
         return self.name
 
     def __iter__(self):
-        for i in self.entries:
+        for i in self.entries.values():
             yield i
+
+    def __getitem__(self, key: str) -> OrderedDict:
+        _dict_lower = {k.lower(): v for k, v in self._dictlower.items()}
+        return _dict_lower[key.lower()]
