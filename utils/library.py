@@ -91,7 +91,7 @@ class TbLibraryCollection:
                 _entry_cache[entry.name.lower()] = entry
         return _lib_cache, _entry_cache
 
-    def __iter__(self):
+    def __iter__(self) -> "TbLibrary":
         for i in self.libraries:
             yield i
 
@@ -123,7 +123,7 @@ class TbLibrary:
             self.entries[model.name] = model
             self._dictlower[model.name.lower()] = entry
 
-        self.path = None
+        self.path = path
 
     @property
     def name(self):
@@ -171,7 +171,7 @@ class TbLibrary:
     def __str__(self):
         return self.name
 
-    def __iter__(self):
+    def __iter__(self) -> OrderedDict:
         for i in self.entries.values():
             yield i
 
