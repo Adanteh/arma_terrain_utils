@@ -64,7 +64,7 @@ def load_tb(path: Path) -> DataFrame:
 
     if not path.is_file():
         raise FileNotFoundError(f"File {path} does not exist")
-    df = pd.read_csv(path, delimiter=";", header=0, names=names)  # type: DataFrame
+    df = pd.read_csv(path, delimiter=";", header=None, names=names)  # type: DataFrame
     return df
 
 
