@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from typing import List, Union, Tuple, Dict
 from collections import OrderedDict
 
+import ctypes
 import xmltodict
 
 
@@ -21,6 +22,15 @@ def dict_keys_lower(iterable: Union[OrderedDict, dict, list]):
     else:
         return iterable
     return newdict
+
+
+def get_v4_hash(name: str) -> int:
+    """Creates the hash required for TB, given `name` (template name)"""
+    _hash = 0
+    for letter in name:
+        _hash = (ord(letter) + (_hash << 6) + (_hash << 16) - _hash) & 0xFFFFFFFF
+    return ctypes.c_long(_hash).value
+
 
 
 def tbcolor_to_hex(number: int) -> "str":

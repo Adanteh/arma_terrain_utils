@@ -19,7 +19,7 @@ if str(FOLDER) not in sys.path:
     sys.path.insert(0, str(FOLDER))
 
 from utils import print  # noqa: E402
-from utils.library import ModelEntry  # noqa: E402
+from utils.library import ModelEntry, get_v4_hash  # noqa: E402
 from utils.process.library.folders import folderWalk, BLACKLIST  # noqa: E402
 
 
@@ -97,6 +97,7 @@ class folderToLibrary:
         tml_base["File"] = entry.file
         tml_base["Fill"] = entry.fill
         tml_base["Outline"] = entry.outline
+        tml_base["Hash"] = get_v4_hash(uniquename)
         return tml_base
 
     def handle_uniqueness(self, name: str) -> str:
