@@ -3,9 +3,6 @@ from dataclasses import dataclass, astuple
 from typing import Generator
 
 
-NAMES = ("model", "x", "y", "dir", "pitch", "bank", "scale", "z", "end")
-
-
 @dataclass
 class TbRow:
     """
@@ -28,7 +25,6 @@ class TbRow:
         for name, field_type in self.__annotations__.items():
             if not isinstance(self.__dict__[name], field_type):
                 setattr(self, name, field_type(self.__dict__[name]))
-
 
     def as_line(self) -> str:
         """Properly formatted line for a TB file"""
@@ -53,6 +49,9 @@ def tb_iterator(path: Path) -> Generator[TbRow, None, None]:
             yield TbRow.from_line(line)
 
 
+###
+# Pandas section, don't copy this for other tools
+###
 from csv import QUOTE_NONE, QUOTE_NONNUMERIC  # noqa: F401, E402
 import pandas as pd  # noqa: E402
 from pandas import DataFrame  # noqa: E402
@@ -60,7 +59,7 @@ from pandas import DataFrame  # noqa: E402
 
 def load_tb(path: Path) -> DataFrame:
     """Makes pandas DataFrame out of Terrain builder format"""
-    names = NAMES
+    names = ("model", "x", "y", "dir", "pitch", "bank", "scale", "z", "end")
 
     if not path.is_file():
         raise FileNotFoundError(f"File {path} does not exist")

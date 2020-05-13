@@ -1,6 +1,6 @@
 from pathlib import Path
 from dataclasses import dataclass
-from typing import List, Union, Tuple, Dict
+from typing import List, Union, Tuple, Dict, Optional
 from collections import OrderedDict
 
 import ctypes
@@ -30,7 +30,6 @@ def get_v4_hash(name: str) -> int:
     for letter in name:
         _hash = (ord(letter) + (_hash << 6) + (_hash << 16) - _hash) & 0xFFFFFFFF
     return ctypes.c_long(_hash).value
-
 
 
 def tbcolor_to_hex(number: int) -> "str":
@@ -109,9 +108,12 @@ class TbLibraryCollection:
         """Gets the library name from model"""
         return self._lib[name.lower()]
 
-    def get_entry(self, name: str) -> ModelEntry:
+    def get_entry(self, name: str) -> Union[ModelEntry, None]:
         """Gets the ModelEntry from model"""
-        return self._entries[name.lower()]
+        try:
+            return self._entries[name.lower()]
+        except KeyError:
+            return None
 
     def __getitem__(self, key: str):
         return self.get_entry(key)
@@ -188,3 +190,75 @@ class TbLibrary:
     def __getitem__(self, key: str) -> OrderedDict:
         _dict_lower = {k.lower(): v for k, v in self._dictlower.items()}
         return _dict_lower[key.lower()]
+
+
+class TbObject:
+    """Object with all data a terrain builder object holds"""
+
+    version = "0.1"
+
+    def __init__(
+        self,
+        classname: str,
+        position: Optional[List[int]] = [0, 0, 0],
+        rotation: Optional[List[int]] = [0, 0, 0],
+        scale: float = 1,
+    ):
+        r"""
+            args:
+            classname (str): template/modelname
+            [position] (list): x, y, z position (z being above sea level)
+            [rotation] (list): pitch, bank, yaw
+            [scale] (int): scale
+        """
+        self.classname = classname.strip('"')  # Remove double quotes
+        self.position = position
+        self.rotation = rotation
+        self.scale = scale
+
+    def __repr__(self):
+        return "{}({} at pos {self.position_round()})".format(self.__class__.__name__, self.classname)
+
+    def __str__(self):
+        return self.classname
+
+    def position_round(self) -> list:
+        """Gets x, y coordinates in full meters"""
+        return [round(f, 0) for f in self.position[:2]]
+
+    @classmethod
+    def from_tb_format(cls, line: str):
+        """Constructs a tb object from a import/export line"""
+        data = line.split(";")
+        datafloat = [float(f) for f in data[1:8]]
+        datafloat.insert(0, data[0])
+        position = [datafloat[1], datafloat[2], datafloat[7]]
+        rotation = [datafloat[4], datafloat[5], datafloat[3]]
+        return cls(data[0], position, rotation, float(data[6]))
+
+    def tb_format(self) -> str:
+        """Gets export/import line in TB format"""
+        return (
+            ";".join(
+                str(x)
+                for x in (
+                    '"' + self.classname + '"',
+                    self.position[0],  # X
+                    self.position[1],  # Y
+                    self.rotation[2],  # Yaw
+                    self.rotation[0],  # Pitch
+                    self.rotation[1],  # Bank
+                    self.scale,
+                    self.position[2],
+                )
+            )
+            + ";"
+        )
+
+
+def tb_split_simple(line: str) -> List[List[str]]:
+    """Simple splitting of data in TB format"""
+    cleaned = line.strip("\n")
+    if cleaned.endswith(";"):
+        cleaned = cleaned[:-1]
+    return cleaned.split(";")
