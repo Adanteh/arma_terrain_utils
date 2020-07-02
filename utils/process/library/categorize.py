@@ -7,7 +7,7 @@ def clean_name(name: str) -> str:
     """Simplifies folder names, for better more logical grouping"""
 
     # Apex prefix instead of _exp suffix
-    for prefix, suffix in (("apex", "_exp"), ("malden", "_argo"), ("decals", "_decals"), ("enoch", "_enoch")):
+    for prefix, suffix in (("apex", "_exp"), ("malden", "_argo"), ("enoch", "_enoch")):
         if name.find(suffix) != -1:
             name = name.replace(suffix, "")
             if name.startswith("a3"):
